@@ -7,15 +7,12 @@ const progressSlice = createSlice({
 	initialState,
 	reducers: {
 		openProgress(state, action) {
-			console.log('tttttttttttttt')
             state.openProgress=true
 
 		},
         closeProgress(){
             return initialState;
-
         }
-		
 	}
 });
 

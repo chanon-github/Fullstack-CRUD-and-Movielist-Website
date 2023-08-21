@@ -65,8 +65,8 @@ export default function UserLayout({ children }) {
   };
 
   return (
-    <>
-      <div className={smallScreen ? styles.mobileBox : styles.deskTopBox}>
+    <div className={styles.boxContainer}>
+      <div className={smallScreen ? styles.mobileBox : styles.deskTopBox }>
         <div className={styles.container}>
           <div className={styles.header}>
             {/* <Image
@@ -152,6 +152,6 @@ export default function UserLayout({ children }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

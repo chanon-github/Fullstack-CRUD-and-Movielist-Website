@@ -1,8 +1,9 @@
 body{
-  background-image: url("/bg-office.png");
+  /* background-image: url("/bg-office.png");
+  margin: 0; */
   margin: 0;
-  /* width: 100%;
-  height: 100vh; */
+  width: 100%;
+  height: 100vh;
 }
 
 
