@@ -2,26 +2,46 @@
 import RegisterView from "./RegisterView";
 import * as ServiceWeb from "@/service/serviceWeb";
 import * as Constant from '@/constants/Constant'
+import { useRouter } from 'next/navigation'
+import { openModal } from '@/redux/reducers/alert'; 
+import { setCurrentPage } from "@/redux/reducers/currentPage";
+import { useDispatch } from 'react-redux'; 
+import { currentPageTxt } from "@/constants/Constant";
+import { useEffect } from "react";
+import { closeProgress,openProgress } from '@/redux/reducers/progress';
+
+
 const RegisterContainer = (props) => {
-  // const navigate = useNavigate();
-  const {handleOpenModal} = props
   
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(setCurrentPage({currentPage:Constant.currentPageTxt.REGISTER}))
+  },[])
+
   const onSubmitForm = async (formData) => {
     let parameter = {
       username: formData.username,
       password: formData.password,
       email: formData.email,
     };
+
+    dispatch(openProgress())
     const response = await ServiceWeb.register(parameter);
     const result = await response.json();
+    
+
     if (result && result.status_code === 200) {
       
-      handleOpenModal(result?.message,Constant.alertSeverity.SUCCESS)
-      // navigate("/login");
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.message}))
+      router.push('/user/login');
 
     } else {
-      handleOpenModal(result?.message,Constant.alertSeverity.ERROR)
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
     }
+
+    dispatch(closeProgress())
    
   };
 

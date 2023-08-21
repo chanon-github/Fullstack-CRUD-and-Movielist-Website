@@ -6,26 +6,64 @@ import styles from "@/styles/user.module.css";
 import Divider from "@mui/material/Divider";
 import Image from "next/image";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import Icon from '@mui/material/Icon';
 import Link from "next/link";
-// import { useRouter ,usePathname, useSearchParams} from 'next/navigation';
 import SnackbarAlert from "@/components/control/SnackbarAlert";
-import { useSelector } from "react-redux"; 
-import { closeModal } from '@/redux/reducers/alert'; 
-import { useDispatch } from 'react-redux'; 
+import { useSelector } from "react-redux";
+import { closeModal } from "@/redux/reducers/alert";
+import { useDispatch } from "react-redux";
+import * as Constant from "@/constants/Constant";
+import Progress from "@/components/control/Progress";
+import { closeProgress } from "@/redux/reducers/progress";
 
 export default function UserLayout({ children }) {
-  const alertValue = useSelector((state)=>state.alertReducer)
+  const alertValue = useSelector((state) => state.alertReducer);
+  const currentPageValue = useSelector(
+    (state) => state.currentPageReducer.currentPage
+  );
+  const openProgress = useSelector(
+    (state) => state.progressReducer.openProgress
+  );
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const dispatch = useDispatch()
-  // const router = useRouter();
-  // const pathname = usePathname()
-  // const searchParams = useSearchParams()
-  // const currentUrl = window.location.href
-// console.log('  searchParams', searchParams)
-// console.log('  pathname', pathname.slice('/'))
-console.log('alertValue',alertValue)
+  const dispatch = useDispatch();
+  const { currentPageTxt } = Constant;
+
+  const renderFooterTxT = () => {
+
+    switch(currentPageValue) {
+      case currentPageTxt.LOGIN:
+        return (
+          <div>
+            Don't have an account? <Link href="/user/register">Sign up</Link>
+          </div>
+          
+        );
+  
+      case currentPageTxt.FORGOTPWD:
+        console.log('test')
+        return (
+          <div>
+            Return to <Link href="/user/login">Sing in</Link>
+          </div>
+          
+        );
+      case currentPageTxt.REGISTER:
+      return (
+        <div>
+          Do you have aleady account? <Link href="/user/login">Sign in</Link>
+        </div>
+        
+      );
+      default:
+        return (
+          <></>
+          
+        );
+    }
+
+  
+  };
+
   return (
     <>
       <div className={smallScreen ? styles.mobileBox : styles.deskTopBox}>
@@ -102,10 +140,15 @@ console.log('alertValue',alertValue)
                 </a>
               </div>
             </div>
-            <div>
-              Don't have an account? <Link href="/user/register">Sign up</Link>
-            </div>
-            <SnackbarAlert {...alertValue} handleCloseModal={()=>{dispatch(closeModal())}}/>
+            {renderFooterTxT()}
+
+            <SnackbarAlert
+              {...alertValue}
+              handleCloseModal={() => {
+                dispatch(closeModal());
+              }}
+            />
+            <Progress open={openProgress} onClose={()=>dispatch(closeProgress())}/>
           </div>
         </div>
       </div>

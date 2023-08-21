@@ -1,13 +1,27 @@
 'use client'
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import * as ServiceWeb from "@/service/serviceWeb";
 import * as Constant from '@/constants/Constant'
 import ForgotPwdView from "./ForgotPwdView";
+import { openModal } from '@/redux/reducers/alert'; 
+import { useDispatch } from 'react-redux'; 
+import { useRouter } from 'next/navigation'
+import { setCurrentPage } from "@/redux/reducers/currentPage";
+import { currentPageTxt } from "@/constants/Constant";
+import { closeProgress,openProgress } from '@/redux/reducers/progress';
+
 const ForgotPwdContainer = (props) => {
   const { handleOpenModal } = props;
-  // const navigate = useNavigate();
   const [isShowForm,setIsShowForm] = useState(false)
   const [currentEmail,setCurrentEmail] = useState('')
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  useEffect(()=>{
+    
+    dispatch(setCurrentPage({currentPage:currentPageTxt.FORGOTPWD}))
+
+  },[])
 
   const onSubmitForm = async (formData) => {
 
@@ -16,33 +30,42 @@ const ForgotPwdContainer = (props) => {
       password: formData.password,
       email: currentEmail,
     };
+    dispatch(openProgress())
+
     const response = await ServiceWeb.resetPassword(parameter);
     const result = await response.json();
+
     if (result && result.status_code === 200) {
- 
-      handleOpenModal(result?.message, Constant.alertSeverity.SUCCESS);
-      // navigate("/login");
+
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.message}))
+      router.push('/user/login');
 
     } else {
-      handleOpenModal(result?.message, Constant.alertSeverity.ERROR);
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
 
     }
+    dispatch(closeProgress())
+
   };
   const onSendResetToken = async (formData) =>{
-    console.log("formData", formData);
     const parameter = {
       email: formData.email
     }
+
+    dispatch(openProgress())
     const response = await ServiceWeb.sendResetToken(parameter);
     const result = await response.json();
+    dispatch(closeProgress())
+
     if (result && result.status_code === 200) {
-      handleOpenModal(result?.message, Constant.alertSeverity.SUCCESS);
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.message}))
+
       setIsShowForm(true)
       setCurrentEmail(formData.email)
 
     } else {
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
 
-      handleOpenModal(result?.message, Constant.alertSeverity.ERROR);
 
     }
     
