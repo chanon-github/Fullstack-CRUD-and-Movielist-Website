@@ -23,7 +23,7 @@ const ListContainer = (props) => {
 
   const handleDelete = async (e, id) => {
     const response = await ServiceWeb.deleteCustomer(id);
-    const result = await response.json();
+    const result = await response?.json();
 
     if(result?.isInvalidToken){
       dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
@@ -46,7 +46,7 @@ const ListContainer = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const slicedData = dataCustomers.slice(
+  const slicedData = dataCustomers?.slice(
     page * rowsPerPage,
     (page + 1) * rowsPerPage
   );

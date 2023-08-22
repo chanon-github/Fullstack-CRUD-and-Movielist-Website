@@ -22,7 +22,7 @@ const CardContainer = (props) => {
 
   const handleDelete = async (id) => {
     const response = await ServiceWeb.deleteCustomer(id);
-    const result = await response.json();
+    const result = await response?.json();
 
     if (result?.isInvalidToken) {
       dispatch(

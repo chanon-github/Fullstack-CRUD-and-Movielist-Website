@@ -33,7 +33,7 @@ const ForgotPwdContainer = (props) => {
     dispatch(openProgress())
 
     const response = await ServiceWeb.resetPassword(parameter);
-    const result = await response.json();
+    const result = await response?.json();
 
     if (result && result.status_code === 200) {
 
@@ -54,7 +54,7 @@ const ForgotPwdContainer = (props) => {
 
     dispatch(openProgress())
     const response = await ServiceWeb.sendResetToken(parameter);
-    const result = await response.json();
+    const result = await response?.json();
     dispatch(closeProgress())
 
     if (result && result.status_code === 200) {

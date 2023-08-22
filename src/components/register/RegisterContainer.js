@@ -33,7 +33,7 @@ const RegisterContainer = (props) => {
 
     dispatch(openProgress())
     const response = await ServiceWeb.register(parameter);
-    const result = await response.json();
+    const result = await response?.json();
     
 
     if (result && result.status_code === 200) {

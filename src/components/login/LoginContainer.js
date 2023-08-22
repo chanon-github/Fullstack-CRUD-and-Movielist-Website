@@ -29,7 +29,7 @@ export default function LoginContainer() {
 
     dispatch(openProgress())
     const response = await ServiceWeb.login(parameter);
-    const result = await response.json();
+    const result = await response?.json();
 
     if (result && result.status_code === 200) {
       dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.message}))
