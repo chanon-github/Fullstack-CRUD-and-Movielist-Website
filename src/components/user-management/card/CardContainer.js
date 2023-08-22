@@ -5,14 +5,15 @@ import { useDispatch } from "react-redux";
 import { openModal } from "@/redux/reducers/alert";
 import { closeProgress, openProgress } from "@/redux/reducers/progress";
 import CardView from "./CardView";
+import { useRouter } from "next/navigation";
 
 const CardContainer = (props) => {
-  const { dataCustomers ,dataListFetch} = props;
+  const { dataCustomers, dataListFetch } = props;
 
   const [openForm, setOpenForm] = React.useState(false);
   const [idCustomer, setIdCustomer] = React.useState();
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
+  const router = useRouter();
   const handleOpenForm = (id) => {
     setIdCustomer(id);
     setOpenForm(true);
@@ -23,28 +24,38 @@ const CardContainer = (props) => {
     const response = await ServiceWeb.deleteCustomer(id);
     const result = await response.json();
 
- 
-
-    if (result.status && result.status === 200) {
-      dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.text}))
-      dataListFetch()
-    }else{
-      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.text}))
+    if (result?.isInvalidToken) {
+      dispatch(
+        openModal({
+          alertSeverity: Constant.alertSeverity.ERROR,
+          message: result?.message,
+        })
+      );
+      router.push("/user/login");
+    } else if (result.status && result.status === 200) {
+      dispatch(
+        openModal({
+          alertSeverity: Constant.alertSeverity.SUCCESS,
+          message: result?.message,
+        })
+      );
+      dataListFetch();
+    } else {
+      dispatch(
+        openModal({
+          alertSeverity: Constant.alertSeverity.ERROR,
+          message: result?.message,
+        })
+      );
     }
-
   };
 
   return (
     <>
       <CardView
         dataCustomers={dataCustomers}
-        // slicedData={slicedData}
         openForm={openForm}
         idCustomer={idCustomer}
-        // rowsPerPage={rowsPerPage}
-        // page={page}
-        // handleChangePage={handleChangePage}
-        // handleChangeRowsPerPage={handleChangeRowsPerPage}
         handleCloseForm={handleCloseForm}
         handleOpenForm={handleOpenForm}
         handleDelete={handleDelete}

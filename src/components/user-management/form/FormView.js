@@ -9,8 +9,6 @@ import { useForm, Controller } from "react-hook-form";
 import Grid from "@mui/material/Grid";
 import PersonIcon from "@mui/icons-material/Person";
 
-import moment from 'moment';
-
 const FormView = (props) => {
   const { isOpen, handleClose, handleOpen,idCustomer,onSubmit,initValue } = props;
   const {
@@ -23,7 +21,6 @@ const FormView = (props) => {
 
   useEffect(()=>{
     if(idCustomer){
-      console.log('dddddddddddddddddddd',initValue)
       reset(initValue)
     }
   },[initValue?.id])

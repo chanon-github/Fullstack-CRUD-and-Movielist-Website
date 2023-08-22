@@ -1,6 +1,4 @@
-const API_PORT = "8080";
-const API_URL = `http://localhost:${API_PORT}/portfolio`;
-// const API_URL = `https://cha-new-api-1864e99d2038.herokuapp.com/bluestone`;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;;
 
 export const getToken = () => {
   const token = localStorage.getItem("token");
@@ -72,23 +70,6 @@ export const resetPassword = async (parameter) => {
   return response;
 };
 
-
-
-// export const login = async (userLogin) => {
-//   let response = null;
-//   try {
-//     response = await fetch(`${API_URL}/gogoji/login`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json;charset=utf-8",
-//       },
-//       body: JSON.stringify(userLogin),
-//     });
-//   } catch (err) {
-//     console.log("Request rejected of fetchGetGIS : ", err);
-//   }
-//   return response;
-// };
 
 export const getAllCustomers = async (id=null) => {
   const token = getToken();

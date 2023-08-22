@@ -11,10 +11,15 @@ import { closeProgress, openProgress } from "@/redux/reducers/progress";
 import { useDispatch } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { openModal } from '@/redux/reducers/alert'; 
+import * as Constant from '@/constants/Constant'
+import { useRouter } from 'next/navigation'
+
 
 export default function UserManagementMain() {
   const [dataCustomers, setData] = useState([]);
   const dispatch = useDispatch();
+  const router = useRouter()
 
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -29,7 +34,9 @@ export default function UserManagementMain() {
     const response = await ServiceWeb.getAllCustomers();
     if (response?.isInvalidToken) {
       setData([]);
-      // navigate("/");
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:response?.message}))
+      router.push('/user/login');
+
     } else {
       setData(response);
     }

@@ -5,6 +5,7 @@ import * as Constant from '@/constants/Constant'
 import { useDispatch } from 'react-redux'; 
 import { openModal } from '@/redux/reducers/alert'; 
 import { closeProgress,openProgress } from '@/redux/reducers/progress';
+import { useRouter } from 'next/navigation'
 
 const ListContainer = (props) => {
   const { dataCustomers ,dataListFetch} = props;
@@ -13,7 +14,7 @@ const ListContainer = (props) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const dispatch = useDispatch()
-
+  const router = useRouter()
   const handleCloseForm = () => setOpenForm();
   const handleOpenForm = (e, id) => {
     setIdCustomer(id);
@@ -24,11 +25,15 @@ const ListContainer = (props) => {
     const response = await ServiceWeb.deleteCustomer(id);
     const result = await response.json();
 
-    if (result.status && result.status === 200) {
-      dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.text}))
+    if(result?.isInvalidToken){
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
+      router.push('/user/login');
+    }
+    else if (result.status && result.status === 200) {
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.message}))
       dataListFetch()
     }else{
-      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.text}))
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
 
     }
   };

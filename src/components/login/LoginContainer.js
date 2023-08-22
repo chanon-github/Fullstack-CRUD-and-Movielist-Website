@@ -32,6 +32,7 @@ export default function LoginContainer() {
 
     if (result && result.status_code === 200) {
       dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.message}))
+      localStorage.setItem("token", result?.token);
       router.push('/user-management');
     } else {
       dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
