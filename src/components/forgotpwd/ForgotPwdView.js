@@ -36,6 +36,20 @@ const ForgotPwdView = (props) => {
     return value === password || "Passwords do not match";
   };
 
+  const handleKeyPressSendToken = (event) => {
+
+    if (event.key === 'Enter') {
+      handleSubmitFormSendToken(onSendResetToken)();
+    }
+  };
+
+  const handleKeyPressResetPwd = (event) => {
+
+    if (event.key === 'Enter') {
+      handleSubmitFormResetPswd(onSubmitForm)();
+    }
+  };
+
   return (
     <>
       <form>
@@ -59,6 +73,7 @@ const ForgotPwdView = (props) => {
                 margin={"dense"}
                 error={errorsFormSendToken.email ? true : false}
                 required
+                // onKeyDown={handleKeyPressSendToken}
                 InputLabelProps={{
                   style: { fontSize: 12 },
                 }}
@@ -100,6 +115,7 @@ const ForgotPwdView = (props) => {
                   margin={"dense"}
                   error={errorsFormResetPswd.verifyCode ? true : false}
                   required
+                  onKeyDown={handleKeyPressResetPwd}
                   InputLabelProps={{
                     style: { fontSize: 12 },
                   }}
@@ -124,13 +140,15 @@ const ForgotPwdView = (props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Password"
+                  label="New Password"
                   type="password"
                   size="small"
                   fullWidth
                   margin={"dense"}
                   error={errorsFormResetPswd.password ? true : false}
                   required
+                  onKeyDown={handleKeyPressResetPwd}
+
                   InputLabelProps={{
                     style: { fontSize: 12 },
                   }}
@@ -162,6 +180,8 @@ const ForgotPwdView = (props) => {
                   margin={"dense"}
                   error={errorsFormResetPswd.confirmPassword ? true : false}
                   required
+                  onKeyDown={handleKeyPressResetPwd}
+
                   InputLabelProps={{
                     style: { fontSize: 12 },
                   }}

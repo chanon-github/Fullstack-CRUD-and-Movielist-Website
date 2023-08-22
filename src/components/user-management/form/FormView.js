@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import PersonIcon from "@mui/icons-material/Person";
 
 const FormView = (props) => {
-  const { isOpen, handleClose, handleOpen,idCustomer,onSubmit,initValue } = props;
+  const { isOpen, handleClose, handleOpen, idCustomer, onSubmit, initValue } = props;
   const {
     reset,
     register,
@@ -19,11 +19,11 @@ const FormView = (props) => {
     formState: { errors },
   } = useForm();
 
-  useEffect(()=>{
-    if(idCustomer){
-      reset(initValue)
+  useEffect(() => {
+    if (idCustomer) {
+      reset(initValue);
     }
-  },[initValue?.id])
+  }, [initValue?.id]);
   const phoneNumberRegex = /^02\d{8}$/;
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const validateAge = (value) => {
@@ -34,7 +34,14 @@ const FormView = (props) => {
 
     // return ageInYears > 10 || "You must be at least 20 years old.";
     return ageInYears > 0 || "You must be at least 20 years old.";
+  };
 
+  const handleKeyPress = (event) => {
+
+    if (event.key === 'Enter') {
+      handleSubmit(onSubmit)();
+
+    }
   };
 
   return (
@@ -64,6 +71,8 @@ const FormView = (props) => {
                 name="name"
                 label="Name"
                 id="name"
+                error={errors.name ? true : false}
+                onKeyDown={handleKeyPress}
                 style={{ background: "white" }}
                 {...register("name", { required: true })}
               />
@@ -73,8 +82,6 @@ const FormView = (props) => {
                 </span>
               )}
 
-           
-
               <TextField
                 margin="normal"
                 fullWidth
@@ -82,10 +89,11 @@ const FormView = (props) => {
                 name="address"
                 label="Address"
                 id="address"
+                onKeyDown={handleKeyPress}
                 style={{ background: "white" }}
                 {...register("address")}
               />
-              
+
               <TextField
                 margin="normal"
                 required
@@ -95,6 +103,9 @@ const FormView = (props) => {
                 label="Email"
                 type="email"
                 id="email"
+                error={errors.email ? true : false}
+                onKeyDown={handleKeyPress}
+
                 autoComplete="current-password"
                 style={{ background: "white" }}
                 {...register("email", { required: true, pattern: emailRegex })}
@@ -113,6 +124,8 @@ const FormView = (props) => {
                 name="phone"
                 label="Phone"
                 id="phone"
+                onKeyDown={handleKeyPress}
+                error={errors.phone ? true : false}
                 style={{ background: "white" }}
                 {...register("phone", {
                   // pattern: phoneNumberRegex,
@@ -130,11 +143,28 @@ const FormView = (props) => {
                   name="birth_date"
                   control={control}
                   rules={{ required: true, validate: validateAge }}
-                  render={({ field }) => <TextField InputLabelProps={{ shrink: true }} name="birthdate" id="birthdate" label="Birth Date" type="date" required margin="normal" fullWidth {...field} />}
+                  render={({ field }) => (
+                    <TextField
+                      InputLabelProps={{ shrink: true }}
+                      name="birthdate"
+                      id="birthdate"
+                      label="Birth Date"
+                      type="date"
+                      required
+                      error={errors.birth_date ? true : false}
+
+                      margin="normal"
+                      fullWidth
+                      {...field}
+                    />
+                  )}
                 />
-                {errors.birth_date && <p style={{ color: "red", fontSize: "12px" }}>{errors.birth_date.message}</p>}
+                {errors.birth_date && (
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    {errors.birth_date.message}
+                  </p>
+                )}
               </label>
-            
             </Grid>
           </Grid>
         </DialogContent>

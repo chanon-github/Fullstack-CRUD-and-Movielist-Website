@@ -9,7 +9,10 @@ import { useDispatch } from 'react-redux';
 import { currentPageTxt } from "@/constants/Constant";
 import { useEffect } from "react";
 import { closeProgress,openProgress } from '@/redux/reducers/progress';
-
+import bcrypt from 'bcryptjs'
+// import CryptoJS from 'crypto-js';
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
 
 const RegisterContainer = (props) => {
   
@@ -21,9 +24,10 @@ const RegisterContainer = (props) => {
   },[])
 
   const onSubmitForm = async (formData) => {
+
     let parameter = {
       username: formData.username,
-      password: formData.password,
+      password: sha256(formData.password).toString(Base64),
       email: formData.email,
     };
 

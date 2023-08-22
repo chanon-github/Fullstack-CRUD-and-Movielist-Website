@@ -26,9 +26,17 @@
 .boxContainer{
     width:100%;
     height: 100%;
-    background-image: url("/bg-office.png")
-
-
+    filter: blur(2px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+ 
+    background-image: url("/wallpaperflare.com_wallpaper.jpg");
+    /* background-image: url("/bg-office.png"); */
+  
+}
+.hideBackground{
+    display: 'hidden';
 }
 .container{
     margin: 20px;

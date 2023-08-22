@@ -10,7 +10,8 @@ import { useDispatch } from 'react-redux';
 import { setCurrentPage } from '@/redux/reducers/currentPage';
 import { useEffect } from 'react';
 import { closeProgress,openProgress } from '@/redux/reducers/progress';
-
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
 export default function LoginContainer() {
 
   const router = useRouter()
@@ -23,7 +24,7 @@ export default function LoginContainer() {
 
     let parameter = {
       username: formData.username,
-      password: formData.password,
+      password:sha256(formData.password).toString(Base64),
     };
 
     dispatch(openProgress())

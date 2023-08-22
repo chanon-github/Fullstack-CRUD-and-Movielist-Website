@@ -64,8 +64,8 @@ export default function UserLayout({ children }) {
   
   };
 
-  return (
-    <div className={styles.boxContainer}>
+  return (<>
+    <div className={smallScreen ? styles.hideBackground :styles.boxContainer}></div>
       <div className={smallScreen ? styles.mobileBox : styles.deskTopBox }>
         <div className={styles.container}>
           <div className={styles.header}>
@@ -89,7 +89,7 @@ export default function UserLayout({ children }) {
             <div className={styles.logoContainer}>
               <div className="logo">
                 <a
-                  href="https://www.facebook.com/Bluestone.co.th/"
+                  // href="https://www.facebook.com/Bluestone.co.th/"
                   target="_blank"
                 >
                   <Image
@@ -102,7 +102,7 @@ export default function UserLayout({ children }) {
               </div>
               <div className="logo">
                 <a
-                  href="https://www.instagram.com/bluestonethailand/"
+                  // href="https://www.instagram.com/bluestonethailand/"
                   target="_blank"
                 >
                   <Image
@@ -115,7 +115,7 @@ export default function UserLayout({ children }) {
               </div>
               <div className="logo">
                 <a
-                  href="https://line.me/ti/p/~@bluestonethailand"
+                  // href="https://line.me/ti/p/~@bluestonethailand"
                   target="_blank"
                 >
                   <Image
@@ -128,7 +128,7 @@ export default function UserLayout({ children }) {
               </div>
               <div className="logo">
                 <a
-                  href="https://www.youtube.com/channel/UCQ3mRpetmm5Ek-LLdTjwaNQ"
+                  // href="https://www.youtube.com/channel/UCQ3mRpetmm5Ek-LLdTjwaNQ"
                   target="_blank"
                 >
                   <Image
@@ -152,6 +152,7 @@ export default function UserLayout({ children }) {
           </div>
         </div>
       </div>
-    </div>
+   {/* </div> */}
+    </>
   );
 }

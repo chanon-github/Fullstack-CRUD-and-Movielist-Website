@@ -12,7 +12,13 @@ const RegisterView = (props) => {
     formState: { errors },
   } = useForm();
 
+  const handleKeyPress = (event) => {
 
+    if (event.key === 'Enter') {
+      handleSubmit(onSubmitForm)();
+
+    }
+  };
   const password = watch("password");
   watch("confirmPassword");
 
@@ -40,6 +46,8 @@ const RegisterView = (props) => {
                 margin={"dense"}
                 error={errors.username ? true : false}
                 required
+                onKeyDown={handleKeyPress}
+
                 InputLabelProps={{
                   style: { fontSize: 12 },
                 }}
@@ -70,6 +78,8 @@ const RegisterView = (props) => {
                 margin={"dense"}
                 error={errors.password ? true : false}
                 required
+                onKeyDown={handleKeyPress}
+
                 InputLabelProps={{
                   style: { fontSize: 12 },
                 }}
@@ -101,6 +111,8 @@ const RegisterView = (props) => {
                 margin={"dense"}
                 error={errors.confirmPassword ? true : false}
                 required
+                onKeyDown={handleKeyPress}
+
                 InputLabelProps={{
                   style: { fontSize: 12 },
                 }}
@@ -133,6 +145,8 @@ const RegisterView = (props) => {
                 margin={"dense"}
                 error={errors.email ? true : false}
                 required
+                onKeyDown={handleKeyPress}
+
                 InputLabelProps={{
                   style: { fontSize: 12 },
                 }}

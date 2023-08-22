@@ -12,7 +12,6 @@ const LoginFormView = (props) => {
   const { onSubmitForm } = props;
   // const navigate = useNavigate();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   const {
     register,
@@ -25,6 +24,13 @@ const LoginFormView = (props) => {
     // navigate("/forgotpwd");
   };
 
+  const handleKeyPress = (event) => {
+
+    if (event.key === 'Enter') {
+      handleSubmit(onSubmitForm)();
+
+    }
+  };
   return (
     <>
       <form>
@@ -45,6 +51,8 @@ const LoginFormView = (props) => {
                   fullWidth
                   margin={"dense"}
                   error={errors.username ? true : false}
+                  onKeyDown={handleKeyPress}
+
                   required
                   InputLabelProps={{
                     style: { fontSize: 12 },
@@ -75,6 +83,8 @@ const LoginFormView = (props) => {
                   margin={"dense"}
                   error={errors.password ? true : false}
                   required
+                  onKeyDown={handleKeyPress}
+              
                   InputLabelProps={{
                     style: { fontSize: 12 },
                   }}
@@ -87,16 +97,16 @@ const LoginFormView = (props) => {
               </span>
             )}
           </div>
-          <div style={{ textAlign: "center" }}>
+          {/* <div style={{ textAlign: "center" }}>
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox  onChange={(e)=>{console.log('e.value',e)}}/>}
               label={
                 <Typography variant="body1" fontWeight="bold">
                   Remember Me
                 </Typography>
               }
             />
-          </div>
+          </div> */}
           <TextField
             name="formType"
             id="formType"
@@ -109,6 +119,7 @@ const LoginFormView = (props) => {
             fullWidth
             style={{ marginTop: "10px", textTransform: "capitalize" }}
             onClick={handleSubmit(onSubmitForm)}
+           
           >
             {"Login"}
           </Button>
