@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Form from "./form/FormContainer";
 
 const Header = (props) => {
-  const { onChangeView } = props;
+  const { onChangeView ,dataListFetch} = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -25,7 +25,7 @@ const Header = (props) => {
             + Add Customer
           </Button>
         </Grid>
-        <Grid container item xs={2} justifyContent={"flex-end"}>
+        {/* <Grid container item xs={2} justifyContent={"flex-end"}>
           <Grid item xs={2}>
             <IconButton
               color="primary"
@@ -46,10 +46,10 @@ const Header = (props) => {
               <AppsIcon />
             </IconButton>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Grid>
       <div>
-        <Form isOpen={open} handleOpen={handleOpen} handleClose={handleClose}></Form>
+        <Form isOpen={open} handleOpen={handleOpen} handleClose={handleClose} dataListFetch={dataListFetch}></Form>
        
       </div>
     </React.Fragment>

@@ -14,6 +14,7 @@ import Form from "../form/FormContainer";
 import * as ServiceWeb from "@/service/serviceWeb";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useRouter } from 'next/navigation'
 
 const ListView = (props) => {
   const {
@@ -28,43 +29,23 @@ const ListView = (props) => {
     handleCloseForm,
     handleOpenForm,
     handleDelete,
+    dataListFetch
   } = props;
-  // const [openForm, setOpenForm] = React.useState();
-  // const [idCustomer, setIdCustomer] = React.useState();
-  // const [page, setPage] = React.useState(0);
-  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const router = useRouter()
 
-  // const handleCloseForm = () => setOpenForm();
-  // const handleOpenForm = (e,id) => {
-  //   console.log('id',id)
-  //   setIdCustomer(id);
-  //   setOpenForm(true);
-  // };
-
-  // const handleDelete = async (e,id) =>{
-  //   console.log('id',id)
-
-  //   const response = await ServiceWeb.deleteCustomer(id);
-  //   const result = await response.json();
-
-  //   if(result.status && result.status===200){
-  //       alert(result?.text)
-  //       window.location.reload(false);
-  //   }
+  // export default function Animations() {
+  //   return (
+  //     <Box sx={{ width: 300 }}>
+  //       <Skeleton />
+  //       <Skeleton animation="wave" />
+  //       <Skeleton animation={false} />
+  //     </Box>
+  //   );
   // }
-
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // };
-
-  // const handleChangeRowsPerPage = (event) => {
-  //   setRowsPerPage(parseInt(event.target.value, 10));
-  //   setPage(0);
-  // };
-  // const slicedData = dataCustomers.slice(page * rowsPerPage, (page + 1) * rowsPerPage);
-
   return (
     <Paper>
+     
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table" size={"small"}>
           <TableHead>
@@ -109,6 +90,8 @@ const ListView = (props) => {
                     aria-label="add to shopping cart"
                     onClick={(e) => {
                       handleOpenForm(e, row.id);
+                      // router.push(`/user-management/${row.id}`);
+
                     }}
                   >
                     <EditIcon />
@@ -125,6 +108,7 @@ const ListView = (props) => {
                 </TableCell>
               </TableRow>
             ))}
+           
           </TableBody>
         </Table>
         {openForm && (
@@ -133,6 +117,7 @@ const ListView = (props) => {
             handleOpen={handleOpenForm}
             handleClose={handleCloseForm}
             idCustomer={idCustomer}
+            dataListFetch={dataListFetch}
           ></Form>
         )}
       </TableContainer>

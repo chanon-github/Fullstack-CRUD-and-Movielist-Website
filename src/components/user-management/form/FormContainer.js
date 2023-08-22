@@ -1,12 +1,21 @@
-import * as React from "react";
+import {useState,useEffect} from "react";
 import * as ServiceWeb from "@/service/serviceWeb";
 import moment from "moment";
 import FormView from "./FormView";
-const FormContainer = (props) => {
-  const { idCustomer } = props;
+import { useDispatch } from 'react-redux'; 
+import { openModal } from '@/redux/reducers/alert'; 
+import { closeProgress, openProgress } from '@/redux/reducers/progress';
+import { useForm } from "react-hook-form";
+import * as Constant from '@/constants/Constant'
 
-  React.useEffect(() => {
-    console.log("idCustomer", idCustomer);
+const FormContainer = (props) => {
+  const { idCustomer ,dataListFetch} = props;
+  const [initValue, setInitValue] = useState(null);
+  const dispatch = useDispatch()
+  // const {
+  //   reset,
+  // } = useForm();
+ useEffect(() => {
     if (idCustomer) {
       //edit
       const dataFetch = async () => {
@@ -19,7 +28,8 @@ const FormContainer = (props) => {
             ...response?.[0],
             birth_date: moment(response[0]?.birth_date).format("YYYY-MM-DD"),
           };
-          reset(result);
+          // reset(result);
+          setInitValue(result)
           console.log("response", response);
         }
       };
@@ -29,25 +39,40 @@ const FormContainer = (props) => {
 
   const onSubmit = async (formData) => {
     if (idCustomer) {
+      dispatch(openProgress())
       const response = await ServiceWeb.editCustomer(formData);
       const result = await response.json();
       if (result.status && result.status === 200) {
-        alert(result?.text);
-        window.location.reload(false);
+        dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.text}))
+        dataListFetch()
+        console.log(dataListFetch)
+        // alert(result?.text);
+        // window.location.reload(false);
+      }else{
+        dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.text}))
+        dispatch(closeProgress())
+
       }
     } else {
+      dispatch(openProgress())
       const response = await ServiceWeb.addCustomer(formData);
       const result = await response.json();
       if (result.status && result.status === 200) {
-        alert(result?.text);
-        window.location.reload(false);
+        dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.text}))
+        dataListFetch()
+        dispatch(closeProgress())
+        // alert(result?.text);
+        // window.location.reload(false);
+      }else{
+        dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.text}))
+        dispatch(closeProgress())
       }
     }
   };
 
   return (
     <>
-      <FormView {...props} onSubmit={onSubmit} />
+      <FormView {...props} onSubmit={onSubmit} initValue={initValue}/>
     </>
    
   );

@@ -1,4 +1,4 @@
-import * as React from "react";
+import {useEffect} from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -12,7 +12,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import moment from 'moment';
 
 const FormView = (props) => {
-  const { isOpen, handleClose, handleOpen,idCustomer,onSubmit } = props;
+  const { isOpen, handleClose, handleOpen,idCustomer,onSubmit,initValue } = props;
   const {
     reset,
     register,
@@ -20,6 +20,13 @@ const FormView = (props) => {
     control,
     formState: { errors },
   } = useForm();
+
+  useEffect(()=>{
+    if(idCustomer){
+      console.log('dddddddddddddddddddd',initValue)
+      reset(initValue)
+    }
+  },[initValue?.id])
   const phoneNumberRegex = /^02\d{8}$/;
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const validateAge = (value) => {
@@ -28,7 +35,9 @@ const FormView = (props) => {
     const ageInMilliseconds = today - enteredDate;
     const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365);
 
-    return ageInYears > 10 || "You must be at least 20 years old.";
+    // return ageInYears > 10 || "You must be at least 20 years old.";
+    return ageInYears > 0 || "You must be at least 20 years old.";
+
   };
 
   return (
@@ -109,7 +118,7 @@ const FormView = (props) => {
                 id="phone"
                 style={{ background: "white" }}
                 {...register("phone", {
-                  pattern: phoneNumberRegex,
+                  // pattern: phoneNumberRegex,
                   required: true,
                 })}
               />

@@ -1,43 +1,35 @@
 import * as React from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  TablePagination,
-} from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import Form from "../form/FormContainer";
 import * as ServiceWeb from "@/service/serviceWeb";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ListView from "./ListView";
+import * as Constant from '@/constants/Constant'
+import { useDispatch } from 'react-redux'; 
+import { openModal } from '@/redux/reducers/alert'; 
+import { closeProgress,openProgress } from '@/redux/reducers/progress';
+
 const ListContainer = (props) => {
-  const { dataCustomers } = props;
+  const { dataCustomers ,dataListFetch} = props;
   const [openForm, setOpenForm] = React.useState();
   const [idCustomer, setIdCustomer] = React.useState();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const dispatch = useDispatch()
 
   const handleCloseForm = () => setOpenForm();
   const handleOpenForm = (e, id) => {
-    console.log("id", id);
     setIdCustomer(id);
     setOpenForm(true);
   };
 
   const handleDelete = async (e, id) => {
-    console.log("id", id);
-
     const response = await ServiceWeb.deleteCustomer(id);
     const result = await response.json();
 
     if (result.status && result.status === 200) {
-      alert(result?.text);
-      window.location.reload(false);
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.text}))
+      dataListFetch()
+    }else{
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.text}))
+
     }
   };
 
@@ -67,6 +59,8 @@ const ListContainer = (props) => {
       handleCloseForm={handleCloseForm}
       handleOpenForm={handleOpenForm}
       handleDelete={handleDelete}
+       dataListFetch={dataListFetch}
+      
     />
     // <Paper>
     // <TableContainer component={Paper}>
