@@ -6,15 +6,6 @@ import Button from "@mui/material/Button";
 
 const ForgotPwdView = (props) => {
   const { onSubmitForm, onSendResetToken, isShowForm } = props;
-  // const navigate = useNavigate();
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   control,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm();
 
   const {
     control: controlFormSendToken,
@@ -37,15 +28,13 @@ const ForgotPwdView = (props) => {
   };
 
   const handleKeyPressSendToken = (event) => {
-
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSubmitFormSendToken(onSendResetToken)();
     }
   };
 
   const handleKeyPressResetPwd = (event) => {
-
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSubmitFormResetPswd(onSubmitForm)();
     }
   };
@@ -58,6 +47,9 @@ const ForgotPwdView = (props) => {
           <Controller
             name="email"
             control={controlFormSendToken}
+            onChange={() => {
+              console.log("dddddddddddddddd");
+            }}
             rules={{
               required: "This field is required*",
               pattern: {
@@ -73,7 +65,7 @@ const ForgotPwdView = (props) => {
                 margin={"dense"}
                 error={errorsFormSendToken.email ? true : false}
                 required
-                // onKeyDown={handleKeyPressSendToken}
+                onKeyDown={handleKeyPressSendToken}
                 InputLabelProps={{
                   style: { fontSize: 12 },
                 }}
@@ -87,6 +79,7 @@ const ForgotPwdView = (props) => {
             </span>
           )}
         </div>
+        <TextField style={{ display:'none' }} />
         <Button
           variant="contained"
           fullWidth
@@ -97,9 +90,8 @@ const ForgotPwdView = (props) => {
         </Button>
       </form>
 
-
       {isShowForm && (
-        <form style={{marginTop:'25px'}}>
+        <form style={{ marginTop: "25px" }}>
           <div>
             <Controller
               name="verifyCode"
@@ -148,7 +140,6 @@ const ForgotPwdView = (props) => {
                   error={errorsFormResetPswd.password ? true : false}
                   required
                   onKeyDown={handleKeyPressResetPwd}
-
                   InputLabelProps={{
                     style: { fontSize: 12 },
                   }}
@@ -181,7 +172,6 @@ const ForgotPwdView = (props) => {
                   error={errorsFormResetPswd.confirmPassword ? true : false}
                   required
                   onKeyDown={handleKeyPressResetPwd}
-
                   InputLabelProps={{
                     style: { fontSize: 12 },
                   }}
