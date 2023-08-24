@@ -14,12 +14,15 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useRouter } from "next/navigation";
+
+const pages = ["Popular", "Top Rated", "Blog"];
+const settings = ["User Management", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const router = useRouter();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -157,11 +160,27 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link href={"/user-management"} style={{textDecoration:'none'}}>
+                  <Typography textAlign="center" style={{color:'black'}}>
+                    {"User Management"}
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleCloseUserMenu();
+                  localStorage.removeItem("token");
+                  router.push("/user/login");
+                }}
+              >
+                <Typography textAlign="center">{"Log out"}</Typography>
+              </MenuItem>
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
         </Toolbar>

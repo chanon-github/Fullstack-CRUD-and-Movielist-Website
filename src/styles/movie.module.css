@@ -7,13 +7,15 @@
 }
 
 .movieCard{
-
     border-radius: 10px;
-   
     word-wrap: break-word;
     width: 200px;
     height: 370px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.movieCard:hover{
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;  
+
 }
 .movieImg{
     border-top-left-radius: 10px;
@@ -111,7 +113,6 @@
     }
     .overviewDiv{
         width: 100%;
-        /* this code clamps based on specified lines */
         overflow: hidden;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;

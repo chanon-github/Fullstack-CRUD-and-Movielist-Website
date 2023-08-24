@@ -6,8 +6,7 @@ export default function LayoutMovie({ children }) {
   return (
     <div>
       <Navbar />
-      {/* <div className={styles.layoutContainer} >{children}</div> */
-      }
+      
       {children}
     </div>
   );

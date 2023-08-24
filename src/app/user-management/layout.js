@@ -8,7 +8,7 @@ import {closeModal } from '@/redux/reducers/alert'
 import { useDispatch } from 'react-redux'; 
 import Progress from "@/components/control/Progress";
 import { closeProgress } from "@/redux/reducers/progress";
-
+// import Navbar from "@/components/movie/Navbar";
 export default function UsermanagementLayout({ children }) {
   const alertValue = useSelector((state) => state.alertReducer);
   const openProgress = useSelector(
@@ -19,6 +19,7 @@ export default function UsermanagementLayout({ children }) {
   return (
     <>
       <Navbar />
+
       {children}
       <Progress open={openProgress} onClose={()=>dispatch(closeProgress())}/>
       <SnackbarAlert

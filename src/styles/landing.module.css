@@ -1,0 +1,89 @@
+.cardContainer{
+   
+    display: flex;
+    width: 400px;
+    height: 400px;
+    /* background-color: red; */
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+    align-items: center;
+
+
+
+}
+.cardContainer:hover {
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;  
+
+}
+
+.cardmenu1{
+    width: 100%;
+    height: 100%;
+    /* background: green; */
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background-image:
+    linear-gradient(to bottom, rgb(72 72 72), rgb(72 60 60 / 84%) 50%), url('/um.jpg');
+    background-size: cover;
+    background-position: center center;
+    /* border-top-left-radius: 20px;
+    border-top-right-radius: 20px; */
+    border-radius: 20px;
+
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+
+      
+}
+.cardmenu1:hover{
+    font-size: 34px;
+
+}
+.cardmenu2:hover{
+    font-size: 34px;
+
+}
+.cardmenu2{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+
+    background-image:
+    linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
+    url('/movie.jpg');
+    background-size: cover;
+    background-position: center center;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+
+
+
+.paperContainer{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 10px;
+}
+.backgroundDiv{
+    width:100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/BG.jpg");
+
+    
+  
+}

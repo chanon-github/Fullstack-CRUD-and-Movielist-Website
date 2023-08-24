@@ -69,13 +69,6 @@ export default function UserLayout({ children }) {
       <div className={smallScreen ? styles.mobileBox : styles.deskTopBox }>
         <div className={styles.container}>
           <div className={styles.header}>
-            {/* <Image
-              alt={"bluestone"}
-              priority={true}
-              src={"/logo2.png"}
-              width={360}
-              height={90}
-            ></Image> */}
             <AccountCircleIcon color="primary" sx={{ fontSize: 150 }} />
           </div>
           {children}

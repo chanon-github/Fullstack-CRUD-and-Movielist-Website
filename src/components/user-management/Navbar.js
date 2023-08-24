@@ -5,8 +5,13 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { useRouter } from 'next/navigation'
+import Box from "@mui/material/Box";
+import Tooltip from "@mui/material/Tooltip";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Link from "next/link";
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -30,11 +35,17 @@ const AppBar = styled(MuiAppBar, {
 
 const Navbar = () => {
   const router = useRouter()
-
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
   const onLogout = () => {
     localStorage.removeItem('token');
     router.push('/user/login');
 
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   return (
@@ -47,15 +58,45 @@ const Navbar = () => {
             </Typography>
           </div>
           <div>
-      
-            <IconButton
-              style={{color:'white'}}
-              onClick={(e) => {
-                onLogout();
+            <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
               }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
-              <LogoutIcon />
-            </IconButton>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link href={"/movie"} style={{textDecoration:'none'}}>
+                  <Typography textAlign="center" style={{color:'black'}}>
+                    {"Movie List"}
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleCloseUserMenu()
+                  onLogout()
+                }}
+              >
+                <Typography textAlign="center">{"Log out"}</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
           </div>
         </div>
       </Toolbar>
