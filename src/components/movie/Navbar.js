@@ -56,7 +56,7 @@ function Navbar() {
               variant="h6"
               noWrap
               sx={{
-                // mr: 2,
+                mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
                 fontWeight: 700,
