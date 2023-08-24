@@ -8,7 +8,7 @@ export default async function Movie() {
 
   const response = await fetch(url);
   const result = await response.json();
-  const data = result.results;
+  const data = result?.results;
 
   
 

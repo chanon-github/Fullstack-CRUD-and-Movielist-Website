@@ -16,10 +16,10 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 export default function MovieDetail(props) {
   const { result } = props;
-  const imgPath = `${ServiceWeb.tmdbImgDomain}${result.poster_path}`;
-  const backdropImgPath = `${ServiceWeb.tmdbImgDomain}${result.backdrop_path}`;
+  const imgPath = `${ServiceWeb.tmdbImgDomain}${result?.poster_path}`;
+  const backdropImgPath = `${ServiceWeb.tmdbImgDomain}${result?.backdrop_path}`;
   const backgroundImageUrl = `url("${backdropImgPath}")`; // Replace with your image URL
-  const yearRelease = result.release_date.split("-")[0];
+  const yearRelease = result?.release_date.split("-")[0];
   const containerStyle = {
     backgroundImage: `linear-gradient(to right, rgba(31.5, 31.5, 31.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 31.5, 31.5, 0.84) 50%, rgba(31.5, 31.5, 31.5, 0.84) 100%),${backgroundImageUrl}`,
   };
@@ -65,7 +65,7 @@ export default function MovieDetail(props) {
               color={"white"}
               sx={{ fontWeight: "bold" }}
             >
-              {result.original_title + " "}
+              {result?.original_title + " "}
               <label style={{ color: "#b9b3b3" }}>{`(${yearRelease})`} </label>
             </Typography>
             <Typography
@@ -73,14 +73,14 @@ export default function MovieDetail(props) {
               color={"white"}
               // sx={{ fontWeight: "bold" }}
             >
-              {result.release_date}
-              {` (${result.original_language.toUpperCase()}) `}{" "}
-              {result.genres.map((item) => item.name + ",")}{" "}
-              {result.runtime + " " + "m"}
+              {result?.release_date}
+              {` (${result?.original_language.toUpperCase()}) `}{" "}
+              {result?.genres.map((item) => item.name + ",")}{" "}
+              {result?.runtime + " " + "m"}
             </Typography>
             <Rating
               name="size-small"
-              defaultValue={result.vote_average}
+              defaultValue={result?.vote_average}
               max={10}
               size="small"
             />
@@ -198,7 +198,7 @@ export default function MovieDetail(props) {
               Production
             </Typography>
             <Grid container justifyContent={"space-between"}>
-              {result.production_companies.map((item) => {
+              {result?.production_companies.map((item) => {
                 return (
                   <>
                     <Grid item xs={12} sm={12} md={6} xl={6}>
