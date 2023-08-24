@@ -16,7 +16,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const pages = ["Popular", "Top Rated", "Blog"];
+const pages = ["Popular", "Top Rated", "Upcoming"];
 const settings = ["User Management", "Logout"];
 
 function Navbar() {
