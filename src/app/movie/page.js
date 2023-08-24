@@ -29,6 +29,7 @@ export default async function Movie() {
               title={movie.title}
               releaseDate={resultDate}
               posterPath={movie.poster_path}
+              overview={movie.overview}
             />
           );
         })}

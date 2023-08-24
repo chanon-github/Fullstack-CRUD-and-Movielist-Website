@@ -63,6 +63,14 @@
     margin-top: 50px;
     
 }
+.overviewDiv{
+   
+    display: none;
+}
+.movieBoxGradient{
+    display: none;
+
+}
 
 @media   (max-width: 1280px) {
     .movieDetailContainer {
@@ -83,11 +91,39 @@
 
   @media   (max-width: 1280px) {
     .movieCard {
-        /* border-radius: 10px;
+        border-radius: 10px;
    
         word-wrap: break-word;
         width: 100%;
-        height: auto;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+        height: 100%;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+    .movieImg{
+        width: 90px;
+        height: 140px;
+        border-top-left-radius: 0px;
+    border-top-right-radius:  0px;
+    }
+    .movieCardContainer{
+        width: 100%;
+        padding: 20px;
+     
+    }
+    .overviewDiv{
+        width: 100%;
+        /* this code clamps based on specified lines */
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+    }
+    .movieBoxGradient{
+        display:block;
+        background: rgb(2,0,36);
+        background:linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+        height: 100%;
+        border-bottom-right-radius: 10px
     }
   }
+ 
+

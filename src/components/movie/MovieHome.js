@@ -7,12 +7,16 @@ import Grid from "@mui/material/Grid";
 import * as ServiceWeb from "@/service/serviceWeb";
 
 export default function (props) {
-  const { title, releaseDate, posterPath, id } = props;
+  const { title, releaseDate, posterPath, id, overview } = props;
   const imgPath = `${ServiceWeb.tmdbImgDomain}${posterPath}`;
   return (
-    <Grid item key={id}  >
-      <Grid container className={styles.movieCard}>
-        <Grid item  >
+    <Grid item key={id} className={styles.movieCardContainer}>
+      <Grid
+        container
+        className={styles.movieCard}
+        justifyContent={"space-between"}
+      >
+        <Grid item xs={3} md={2} xl={12}>
           <Link href={`/movie/${id}`}>
             <Image
               width={200}
@@ -23,11 +27,39 @@ export default function (props) {
             />
           </Link>
         </Grid>
-        <Grid style={{ margin: "5px" }}>
-          <Typography fontSize={12} sx={{ fontWeight: "bold" }}>
+        <Grid item style={{ margin: "5px" }} xs={7} md={8} xl={12}>
+          <Typography
+            fontSize={12}
+            sx={{
+              fontWeight: "bold",
+              "@media (max-width: 900px)": {
+                fontSize: "18px",
+              },
+            }}
+          >
             {title}
           </Typography>
-          <Typography fontSize={10}>{releaseDate}</Typography>
+          <Typography
+            gutterBottom
+            fontSize={12}
+            color={"#b0afaf"}
+            sx={{ fontStyle: "oblique" }}
+          >
+            {releaseDate}
+          </Typography>
+          <Typography
+            fontSize={12}
+            className={styles.overviewDiv}
+      
+          >
+            {overview}
+          </Typography>
+        </Grid>
+        <Grid item xs={1} md={1} xl={1}>
+          <div
+          className={styles.movieBoxGradient}
+       
+          ></div>
         </Grid>
       </Grid>
     </Grid>
