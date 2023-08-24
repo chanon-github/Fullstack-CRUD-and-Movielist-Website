@@ -151,3 +151,10 @@ export const deleteCustomer = async (id) => {
   return response;
 };
 
+// ########### TMDB API ################
+export const tmdbApiKey = process.env.NEXT_PUBLIC_API_KEY;
+export const nowPlayingListAPI = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+export const movieDetailAPI = `https://api.themoviedb.org/3/movie`
+
+
+export const tmdbImgDomain = 'https://image.tmdb.org/t/p/original'

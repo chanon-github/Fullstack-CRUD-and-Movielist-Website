@@ -7,7 +7,13 @@ body{
 }
 
 
+.navbar-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 
+}
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
