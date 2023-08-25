@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
-
+import JScookies from "js-cookie";
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -37,7 +37,9 @@ const Navbar = () => {
   const router = useRouter()
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const onLogout = () => {
-    localStorage.removeItem('token');
+    JScookies.remove('token') 
+    JScookies.set('isLogined', false)
+
     router.push('/user/login');
 
   };

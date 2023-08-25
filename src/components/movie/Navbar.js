@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import JScookies from "js-cookie";
 
 const pages = ["Popular", "Top Rated", "Upcoming"];
 const settings = ["User Management", "Logout"];
@@ -170,7 +171,9 @@ function Navbar() {
               <MenuItem
                 onClick={() => {
                   handleCloseUserMenu();
-                  localStorage.removeItem("token");
+                  JScookies.remove('token') 
+                  JScookies.set('isLogined', false)
+
                   router.push("/user/login");
                 }}
               >

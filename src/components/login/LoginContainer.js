@@ -12,17 +12,27 @@ import { useEffect } from 'react';
 import { closeProgress,openProgress } from '@/redux/reducers/progress';
 import sha256 from 'crypto-js/sha256';
 import Base64 from 'crypto-js/enc-base64';
-import Cookies from 'js-cookie';
+import JScookies from 'js-cookie';
+
 export default function LoginContainer() {
 
   const router = useRouter()
   const dispatch = useDispatch()
 
   useEffect(()=>{
+    const token = JScookies.get('token')
+    const isLogined = JScookies.get('isLogined')
+
+    if( isLogined === 'true' && token === undefined   ) {
+      dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:'invalid token'}))
+    }
+
     dispatch(setCurrentPage({currentPage:Constant.currentPageTxt.LOGIN}))
   },[])
-  const onSubmitForm = async (formData) => {
 
+
+  const onSubmitForm = async (formData) => {
+    
     let parameter = {
       username: formData.username,
       password:sha256(formData.password).toString(Base64),
@@ -34,8 +44,8 @@ export default function LoginContainer() {
 
     if (result && result.status_code === 200) {
       dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.message}))
-      localStorage.setItem("token", result?.token);
-      Cookies.set('token', result?.token)
+      JScookies.set('token', result?.token)
+      JScookies.set('isLogined',true )
       router.push('/landing');
     } else {
       dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
