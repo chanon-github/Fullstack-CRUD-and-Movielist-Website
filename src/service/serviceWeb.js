@@ -1,8 +1,8 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;;
-
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;;
+import Cookies from "js-cookie";
 export const getToken = () => {
   const token = localStorage.getItem("token");
-
+  // const token = Cookies.get('token') // => 'value'
   return token;
 };
 
@@ -153,26 +153,26 @@ export const deleteCustomer = async (id) => {
 
 // ########### TMDB API ################
 
-export const getMovie = async (id=null) => {
-  // const token = getToken();
-  let url = ``
-  url = id ? `${API_URL}/movie?id=${id}` :`${API_URL}/movie`
-  let response = null;
-  try {
-    response = await (
-      await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjkxNDExOTUwfQ.irMGCz5pewIj70tEqvO3_AIuf_NPdKOB5IftzTHETgc`,
-        },
-      })
-    ).json();
-  } catch (err) {
-    console.log("Request rejected of fetchGetGIS : ", err);
-  }
-  return response;
-};
+// export const getMovie = async (id=null) => {
+//   // const token = getToken();
+//   let url = ``
+//   url = id ? `${API_URL}/movie?id=${id}` :`${API_URL}/movie`
+//   let response = null;
+//   try {
+//     response = await (
+//       await fetch(url, {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json;charset=utf-8",
+//           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjkxNDExOTUwfQ.irMGCz5pewIj70tEqvO3_AIuf_NPdKOB5IftzTHETgc`,
+//         },
+//       })
+//     ).json();
+//   } catch (err) {
+//     console.log("Request rejected of fetchGetGIS : ", err);
+//   }
+//   return response;
+// };
 
 export const tmdbApiKey = process.env.NEXT_PUBLIC_API_KEY;
 export const nowPlayingListAPI = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}`

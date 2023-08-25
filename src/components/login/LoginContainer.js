@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { closeProgress,openProgress } from '@/redux/reducers/progress';
 import sha256 from 'crypto-js/sha256';
 import Base64 from 'crypto-js/enc-base64';
+import Cookies from 'js-cookie';
 export default function LoginContainer() {
 
   const router = useRouter()
@@ -34,6 +35,7 @@ export default function LoginContainer() {
     if (result && result.status_code === 200) {
       dispatch(openModal({alertSeverity:Constant.alertSeverity.SUCCESS,message:result?.message}))
       localStorage.setItem("token", result?.token);
+      Cookies.set('token', result?.token)
       router.push('/landing');
     } else {
       dispatch(openModal({alertSeverity:Constant.alertSeverity.ERROR,message:result?.message}))
