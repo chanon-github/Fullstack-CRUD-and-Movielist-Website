@@ -18,7 +18,8 @@ export default async function Movie() {
   return (
     // <></>
 <>
-    <Grid container item xs={12} spacing={3} justifyContent={'center'} className={styles.movieListContainer}    >
+    <Grid container  justifyContent={'center'}   className={styles.movieListContainer}    >
+      <Grid item container xs={12}  sm={12} xl={7}  spacing={3} >
         {data?.map((movie) => {
       
           const date = new Date(movie.release_date)
@@ -38,6 +39,7 @@ export default async function Movie() {
             />
           );
         })}
+        </Grid>
     </Grid>
     </>
   );
