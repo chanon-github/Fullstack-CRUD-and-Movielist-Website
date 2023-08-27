@@ -57,7 +57,7 @@ export default function Movie() {
             <LinearProgress />
           </Box>
         </Grid>
-        <Grid item container xs={12} sm={12} xl={6} spacing={3}>
+        <Grid item container xs={12} sm={12} xl={6} spacing={3} sx={{  marginTop: "60px" }}>
           {data?.map((movie) => {
             const date = new Date(movie.release_date);
             const resultDate = date.toLocaleDateString("en-EN", {
