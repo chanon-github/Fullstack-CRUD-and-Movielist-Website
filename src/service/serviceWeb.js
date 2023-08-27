@@ -152,7 +152,7 @@ export const deleteCustomer = async (id) => {
 
 // ########### TMDB API ################
 
-export const getMovie = async (token,id=null) => {
+export const getMoviebyID = async (token,id=null) => {
   // const token = getToken();
   let url = ``
   url = id ? `${API_URL}/movie?id=${id}` :`${API_URL}/movie`
@@ -172,6 +172,28 @@ export const getMovie = async (token,id=null) => {
   }
   return response;
 };
+
+export const getMovie = async (page) => {
+  const token = getToken();
+  let url = ``
+  url = `${API_URL}/movie?page=${page}`
+  let response = null;
+  try {
+    response = await (
+      await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    ).json();
+  } catch (err) {
+    console.log("Request rejected of fetchGetGIS : ", err);
+  }
+  return response;
+};
+
 
 export const tmdbApiKey = process.env.NEXT_PUBLIC_API_KEY;
 export const nowPlayingListAPI = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}`

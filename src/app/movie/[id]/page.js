@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 export default async function MovieDetailPage({ params }) {
   const { id } = params;
   const token = cookies().get('token')?.value
-  const result = await ServiceWeb.getMovie(token,id)
+  const result = await ServiceWeb.getMoviebyID(token,id)
   if(result?.isInvalidToken){
     redirect('/user/login');
   }
