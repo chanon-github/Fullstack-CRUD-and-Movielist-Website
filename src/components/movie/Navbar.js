@@ -18,7 +18,6 @@ import { useRouter } from "next/navigation";
 import JScookies from "js-cookie";
 
 const pages = ["Popular", "Top Rated", "Upcoming"];
-const settings = ["User Management", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -41,7 +40,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" style={{ background: "#032541" }}>
+    <AppBar position="static" style={{ background: "#032541" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link
