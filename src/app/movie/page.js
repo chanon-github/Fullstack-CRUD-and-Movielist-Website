@@ -77,7 +77,7 @@ export default function Movie() {
             );
           })}
         </Grid>
-        <Grid item container justifyContent={"center"} xs={12} sm={12} xl={7}>
+        {/* <Grid item container justifyContent={"center"} xs={12} sm={12} xl={7}>
           <Button
             variant="contained"
             fullWidth
@@ -90,7 +90,7 @@ export default function Movie() {
           >
             {"Load More..."}
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );
