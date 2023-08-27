@@ -1,9 +1,10 @@
 "use client";
 import MovieHome from "@/components/movie/MovieHome";
+import MovieListNowplay from "@/components/movie/MovieListNowplay";
 import styles from "@/styles/movie.module.css";
 import Grid from "@mui/material/Grid";
 import * as ServiceWeb from "@/service/serviceWeb";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
@@ -23,15 +24,12 @@ export default function Movie() {
     setIsLoading(true);
     const response = await ServiceWeb.getMovie(page);
     if (response?.isInvalidToken) {
-      router.push('/user/login');
+      router.push("/user/login");
       setData([]);
       setIsLoading(false);
-
-     
     } else {
       setData([...data, ...response.results]);
       setIsLoading(false);
-
     }
     // dispatch(closeProgress());
   };
@@ -40,8 +38,6 @@ export default function Movie() {
     const page = currentPage + 1;
     setCurrentPage(page);
     dataFetch(page);
-
-
   };
 
   return (
@@ -50,15 +46,37 @@ export default function Movie() {
       <Grid
         container
         justifyContent={"center"}
-        className={styles.movieListContainer}
+        // className={styles.movieListContainer}
       >
-        {/* <Grid item container xs={12} sm={12} xl={12}  style={{display: isLoading ? 'block' : 'none'}}>
-          <Box  sx={{ width: "100%", marginTop: "70px" ,position:'fixed' }}>
+        <Grid
+          item
+          xs={12}
+          // style={{ display: isLoading ? "block" : "none" }}
+        >
+          <Box sx={{ width: "100%", marginTop: "70px", position: "fixed" }}>
             <LinearProgress />
           </Box>
-        </Grid> */}
-
-        <Grid item container xs={12} sm={12} xl={6} spacing={3}  >
+        </Grid>
+        <Grid item container xs={12} sm={12} xl={6} spacing={3}>
+          {data?.map((movie) => {
+            const date = new Date(movie.release_date);
+            const resultDate = date.toLocaleDateString("en-EN", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            return (
+              <MovieListNowplay
+                id={movie.id}
+                title={movie.title}
+                releaseDate={resultDate}
+                posterPath={movie.poster_path}
+                overview={movie.overview}
+              />
+            );
+          })}
+        </Grid>
+        {/* <Grid item container xs={12} sm={12} xl={6} spacing={3}  >
           {data?.map((movie) => {
             const date = new Date(movie.release_date);
             const resultDate = date.toLocaleDateString("en-EN", {
@@ -76,8 +94,8 @@ export default function Movie() {
               />
             );
           })}
-        </Grid>
-        {/* <Grid item container justifyContent={"center"} xs={12} sm={12} xl={7}>
+        </Grid> */}
+        <Grid item  xs={12} sm={12} xl={7}>
           <Button
             variant="contained"
             fullWidth
@@ -90,7 +108,7 @@ export default function Movie() {
           >
             {"Load More..."}
           </Button>
-        </Grid> */}
+        </Grid>
       </Grid>
     </>
   );
