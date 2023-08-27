@@ -16,7 +16,7 @@ export default function (props) {
         className={styles.movieCard}
         justifyContent={"space-between"}
       >
-        <Grid item xs={3} md={2} xl={12}>
+        <Grid item xs={3} sm={2} md={12} xl={12}>
           <Link href={`/movie/${id}`}>
             <Image
               width={200}
@@ -27,7 +27,7 @@ export default function (props) {
             />
           </Link>
         </Grid>
-        <Grid item style={{ margin: "5px" }} xs={7} md={8} xl={12}>
+        <Grid item style={{ margin: "5px" }} xs={7} sm={8} md={12} xl={12}>
           <Typography
             fontSize={12}
             sx={{

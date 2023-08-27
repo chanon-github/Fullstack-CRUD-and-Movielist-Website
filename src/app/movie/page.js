@@ -58,7 +58,7 @@ export default function Movie() {
           </Box>
         </Grid> */}
 
-        <Grid item container xs={12} sm={12} xl={7} spacing={3}  >
+        <Grid item container xs={12} sm={12} xl={6} spacing={3}  >
           {data?.map((movie) => {
             const date = new Date(movie.release_date);
             const resultDate = date.toLocaleDateString("en-EN", {
