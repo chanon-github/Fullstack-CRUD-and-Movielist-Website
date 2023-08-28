@@ -50,7 +50,7 @@ const FormView = (props) => {
         <DialogTitle>Add/Edit Customer</DialogTitle>
         <DialogContent>
           <Grid container>
-            <Grid item xs={5}>
+            {/* <Grid item container justifyContent={'center'} xs={12} md={5}>
               <PersonIcon style={{ fontSize: "150px" }}></PersonIcon>
               <Button
                 variant="contained"
@@ -60,9 +60,9 @@ const FormView = (props) => {
               >
                 Upload
               </Button>
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={5}>
+            <Grid item xs={12} md={12}>
               <TextField
                 margin="normal"
                 required

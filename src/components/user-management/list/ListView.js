@@ -11,10 +11,10 @@ import {
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Form from "../form/FormContainer";
-import * as ServiceWeb from "@/service/serviceWeb";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useRouter } from 'next/navigation'
+import moment from "moment";
 
 const ListView = (props) => {
   const {
@@ -82,7 +82,8 @@ const ListView = (props) => {
                 <TableCell align="right">{row.email}</TableCell>
                 <TableCell align="right">{row.phone}</TableCell>
                 <TableCell align="right">
-                  {row.birth_date ? row.birth_date : "-"}
+                  {row.birth_date ?  moment(row.birth_date).format("YYYY-MM-DD") : "-"}
+                  
                 </TableCell>
                 <TableCell align="right">
                   <IconButton
