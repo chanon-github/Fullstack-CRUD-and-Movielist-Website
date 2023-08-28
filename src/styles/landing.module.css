@@ -83,7 +83,21 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("/BG.jpg");
-
-    
-  
 }
+
+@media   (max-width: 600px) {
+    .cardmenu1 {
+        border-radius: 0px;
+      }
+      .cardmenu2{
+        border-radius: 0px;
+      }
+      .paperContainer{
+        gap: 0px;
+      }
+      .backgroundDiv{
+        background-color: white;
+        background-image: none;
+      }
+      
+    }
