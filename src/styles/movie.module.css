@@ -9,8 +9,10 @@
 .movieCard{
     border-radius: 10px;
     word-wrap: break-word;
-    width: 200px;
-    height: 370px;
+    /* width: 200px;
+    height: 370px; */
+    width: 100%;
+    height: 100%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .movieCard:hover{
@@ -20,7 +22,7 @@
 .movieImg{
     border-top-left-radius: 10px;
     border-top-right-radius:  10px;
-    /* width: 100%; */
+    width: 100%;
 }
 .imgDiv{
     border-radius: 20px;
@@ -74,23 +76,6 @@
     display: none;
 
 }
-
-/* @media   (max-width: 900px) {
-    .movieDetailContainer {
-      height: auto;
-        width: 100%;
-        padding:0px;
-        margin-top: 0px;
-    }
-  } */
-
-  /* @media   (max-width: 900px) {
-    .imgDiv {
-      height: auto;
-    width: 100%;
-    border-radius: 0px;
-    }
-  } */
 
   @media   (max-width: 900px) {
     .movieDetailContainer {

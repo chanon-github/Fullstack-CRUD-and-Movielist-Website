@@ -11,36 +11,42 @@ export default function MovieListNowplay(props) {
   const imgPath = `${ServiceWeb.tmdbImgDomain}${posterPath}`;
   return (
     <>
-    <Grid item key={id} className={styles.movieCardContainer}>
-      <Grid
-        container
-        className={styles.movieCard}
-        justifyContent={"space-between"}
-      >
-        <Grid item xs={3} sm={2} md={12} xl={12}>
-          <Link href={`/movie/${id}`}>
-            <Image
-              width={200}
-              height={300}
-              alt={title}
-              src={imgPath}
-              className={styles.movieImg}
-            />
-          </Link>
-        </Grid>
-        <Grid item style={{ marginLeft: "5px" , width:'200px'}} xs={6}  alignSelf={'center'}>
-          <Typography
-            fontSize={12}
-            sx={{
-              fontWeight: "bold",
-              "@media (max-width: 900px)": {
-                fontSize: "18px",
-              },
-            }}
+      <Grid item key={id} className={styles.movieCardContainer} xs={12} md={3} xl={2}>
+        <Grid
+          container
+          className={styles.movieCard}
+          justifyContent={"space-between"}
+        >
+          <Grid item xs={3} sm={2} md={12} xl={12}>
+            <Link href={`/movie/${id}`}>
+              <Image
+                width={200}
+                height={300}
+                alt={title}
+                src={imgPath}
+                className={styles.movieImg}
+              />
+            </Link>
+          </Grid>
+          <Grid
+            item
+            style={{ margin: "5px" }}
+            xs={6}
+            md={12}
+            alignSelf={"center"}
           >
-            {title}
-          </Typography>
-          <Typography
+            <Typography
+              fontSize={12}
+              sx={{
+                fontWeight: "bold",
+                "@media (max-width: 900px)": {
+                  fontSize: "18px",
+                },
+              }}
+            >
+              {title}
+            </Typography>
+            <Typography
             gutterBottom
             fontSize={12}
             color={"#b0afaf"}
@@ -55,15 +61,12 @@ export default function MovieListNowplay(props) {
           >
             {overview}
           </Typography>
-        </Grid>
-        <Grid item xs={1} md={1} xl={1}>
-          <div
-          className={styles.movieBoxGradient}
-       
-          ></div>
+          </Grid>
+          <Grid item xs={1} md={1} xl={1}>
+            <div className={styles.movieBoxGradient}></div>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
     </>
   );
 }
