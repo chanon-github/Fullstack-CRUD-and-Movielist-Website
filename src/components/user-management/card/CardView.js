@@ -32,23 +32,6 @@ const CardView = (props) => {
   } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const options = [
-    "None",
-    "Atria",
-    "Callisto",
-    "Dione",
-    "Ganymede",
-    "Hangouts Call",
-    "Luna",
-    "Oberon",
-    "Phobos",
-    "Pyxis",
-    "Sedna",
-    "Titania",
-    "Triton",
-    "Umbriel",
-  ];
-
   const ITEM_HEIGHT = 48;
   const open = Boolean(anchorEl);
   const handleClick = (event, index) => {
