@@ -6,6 +6,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - CSS3
 - HTML5
 - MySql
+
+## Features
+- Login Register & Forgotpassword
+- User Management CRUD System
+- MovieList Fetch Data
+- Authentication with JWT Token
+- Multi-Page Layout
+- Styled with MaterialUI
+- Fully Responsive
   
 ## Getting Started
 
