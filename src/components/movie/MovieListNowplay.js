@@ -28,7 +28,7 @@ export default function MovieListNowplay(props) {
             />
           </Link>
         </Grid>
-        {/* <Grid item style={{ margin: "5px" }} xs={7} sm={8} md={12} xl={12}>
+        <Grid item style={{ marginLeft: "5px" }} xs={6} md={12} alignSelf={'center'}>
           <Typography
             fontSize={12}
             sx={{
@@ -55,7 +55,7 @@ export default function MovieListNowplay(props) {
           >
             {overview}
           </Typography>
-        </Grid> */}
+        </Grid>
         <Grid item xs={1} md={1} xl={1}>
           <div
           className={styles.movieBoxGradient}
