@@ -82,7 +82,7 @@ export default function UserLayout({ children }) {
             <div className={styles.logoContainer}>
               <div className="logo">
                 <a
-                  // href="https://www.facebook.com/Bluestone.co.th/"
+                  href="https://www.facebook.com/"
                   target="_blank"
                 >
                   <Image
@@ -95,7 +95,7 @@ export default function UserLayout({ children }) {
               </div>
               <div className="logo">
                 <a
-                  // href="https://www.instagram.com/bluestonethailand/"
+                  href="https://www.instagram.com/"
                   target="_blank"
                 >
                   <Image
@@ -108,7 +108,7 @@ export default function UserLayout({ children }) {
               </div>
               <div className="logo">
                 <a
-                  // href="https://line.me/ti/p/~@bluestonethailand"
+                  href="https://line.me/ti/p/H1hPKWgmkW"
                   target="_blank"
                 >
                   <Image
@@ -121,12 +121,12 @@ export default function UserLayout({ children }) {
               </div>
               <div className="logo">
                 <a
-                  // href="https://www.youtube.com/channel/UCQ3mRpetmm5Ek-LLdTjwaNQ"
+                  href="https://github.com/chanon-github?tab=repositories"
                   target="_blank"
                 >
                   <Image
                     alt={"youtube"}
-                    src={"/icons-youtube.png"}
+                    src={"/github3.png"}
                     width={50}
                     height={50}
                   ></Image>
