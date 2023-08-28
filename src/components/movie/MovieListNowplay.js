@@ -28,7 +28,7 @@ export default function MovieListNowplay(props) {
             />
           </Link>
         </Grid>
-        <Grid item style={{ marginLeft: "5px" }} xs={6} md={12} alignSelf={'center'}>
+        <Grid item style={{ marginLeft: "5px" }} xs={6}  alignSelf={'center'}>
           <Typography
             fontSize={12}
             sx={{
