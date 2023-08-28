@@ -51,13 +51,13 @@ export default function Movie() {
         <Grid
           item
           xs={12}
-          // style={{ display: isLoading ? "block" : "none" }}
+          style={{ display: isLoading ? "block" : "none" }}
         >
           <Box sx={{ width: "100%", marginTop: "70px", position: "fixed" }}>
             <LinearProgress />
           </Box>
         </Grid>
-        <Grid item container xs={12} sm={12} xl={6} spacing={3} sx={{  marginTop: "60px" }}>
+        <Grid item container xs={12} sm={12} xl={8} spacing={3} sx={{  marginTop: "60px" }} justifyContent={"center"}>
           {data?.map((movie) => {
             const date = new Date(movie.release_date);
             const resultDate = date.toLocaleDateString("en-EN", {
